@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Book from './Book'
+import PropTypes from 'prop-types'
 
 function BookShelf(props){
 
@@ -9,7 +10,14 @@ function BookShelf(props){
         <div className="bookshelf-books">
               <ol className="books-grid">
             {props.bookShelf.filter((b) => b.shelf === props.shelf).map(book =>
-              <Book bookId={book.id} title={book.title} thumbnail={book.imageLinks.smallThumbnail} authors={book.authors[0]} shelf={book.shelf} moveToShelf={props.moveToShelf} />
+              <Book
+                key={book.id}
+                bookId={book.id}
+                title={book.title}
+                thumbnail={book.imageLinks.smallThumbnail}
+                authors={book.authors[0]}
+                shelf={book.shelf}
+                moveToShelf={props.moveToShelf} />
             )}
               </ol>
         </div>
@@ -19,3 +27,8 @@ function BookShelf(props){
 
 
 export default BookShelf
+
+BookShelf.propTypes = {
+  bookShelf: PropTypes.array.isRequired,
+  name: PropTypes.string.isRequired,
+}
